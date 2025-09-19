@@ -1,30 +1,45 @@
-// TO DO:  Student class definition  here.
 #ifndef STUDENT_HPP
 #define STUDENT_HPP
 
-#include <iostream>
 #include <string>
-#include "Course.hpp"
+#include <iostream>
 #include "linkedList.hpp"
-using namespace std;
+#include "Course.hpp"
 
-class Student{
-    private:
-        int id;
-        string name;
-        double gpa;
-        linkedList<Course> course;
-    public:
-        Student();
-        Student(int id, const string& name, double gpa);
+using std::string;
 
-        int getId() const;
-        const string& getName() const;
-        double getGpa() const;
+class Student {
+private:
+    int id;
+    string name;
+    double gpa;
+    linkedList<Course> courses;
 
-        void addCourse(const Course& coursera);
+public:
+    // constructors
+    Student();
+    Student(int id, string name, double gpa);
+
+    // accessors
+    int getId() const;
+    string getName() const;
+    double getGpa() const;
+    linkedList<Course>& getCourses();
+
+    // mutators
+    void setId(int id);
+    void setName(string name);
+    void setGpa(double gpa);
+
+    // course operations
+    void addCourse(const Course& new_course);
+
+    // utilities
+    void printStudent();
+    int search(linkedList<Student>, int);
+
+    // pretty-print
+    friend std::ostream& operator<<(std::ostream& os, const Student& s);
 };
-
-ostream& operator<<(ostream& os, const Student& s);
 
 #endif

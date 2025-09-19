@@ -1,66 +1,146 @@
-#ifndef LINKED_LIST_HPP
-#define LINKED_LIST_HPP
-
-#include <iostream>
-#include "linkedList.tpp"
-using namespace std;
+template <typename T>
+linkedList<T>::linkedList() : head(nullptr), length(0) { }
 
 template <typename T>
-class linkedList{
-    private:
-        int length;
-        struct Node {
-            T value;
-            Node* next;
+linkedList<T>::~linkedList() {
+    clear();
+}
 
-            Node(T v = T(), Node* n = nullptr)
-            : value(v), next(n) { }
-        };
+template <typename T>
+linkedList<T>::linkedList(const linkedList<T>& other)
+: head(nullptr), length(0) {
+    copy(other);
+}
 
-       
-        Node* head;
+template <typename T>
+linkedList<T>& linkedList<T>::operator=(const linkedList<T>& other) {
+    if (this == &other) return *this;
+    clear();
+    copy(other);
+    return *this;
+}
 
-    public:
-        // default constructor
-        linkedList();
+template <typename T>
+void linkedList<T>::copy(const linkedList<T>& other) {
+    Node* cur = other.head;
+    while (cur != nullptr) {
+        append(cur->value);
+        cur = cur->next;
+    }
+}
 
-        // destructor
-        ~linkedList();
+template <typename T>
+void linkedList<T>::append(const T& elem) {
+    Node* n = new Node(elem);
+    if (!head) {
+        head = n;
+    } else {
+        Node* curr = head;
+        while (curr->next != nullptr) {
+            curr = curr->next;
+        }
+        curr->next = n;
+    }
+    length++;
+}
 
-        linkedList(const LinkedList<T>& other);
+template <typename T>
+void linkedList<T>::clear() {
+    Node* curr = head;
+    while (curr != nullptr) {
+        Node* nextNode = curr->next;
+        delete curr;
+        curr = nextNode;
+    }
+    head = nullptr;
+    length = 0;
+}
 
-        linkedList<T>& operator=(const linkedList<T>& other);
+template <typename T>
+T& linkedList<T>::getElement(int position) const {
+    if (position < 0 || position >= length) {
+        throw std::string("getElement: Position out of bounds.");
+    }
+    Node* curr = head;
+    for (int i = 0; i < position; i++) {
+        curr = curr->next;
+    }
+    return curr->value;
+}
 
-        // add the argument to the end of the list
-        void append(const T&);
+template <typename T>
+int linkedList<T>::getLength() const {
+    return length;
+}
 
-        // remove all elements in the list, resetting to the initial state
-        void clear();
+template <typename T>
+void linkedList<T>::insert(int position, const T& elem) {
+    if (position < 0 || position > length) {
+        throw std::string("insert: Position out of bounds.");
+    }
+    Node* n = new Node(elem);
+    if (position == 0) {
+        n->next = head;
+        head = n;
+    } else {
+        Node* curr = head;
+        for (int i = 0; i < position - 1; i++) {
+            curr = curr->next;
+        }
+        n->next = curr->next;
+        curr->next = n;
+    }
+    length++;
+}
 
-        // return the element at the given position (argument)
-        T getElement(int) const;
+template <typename T>
+bool linkedList<T>::isEmpty() const {
+    return length == 0;
+}
 
-        // return the current length of the list
-        int getLength() const;
+template <typename T>
+void linkedList<T>::remove(int position) {
+    if (position < 0 || position >= length) {
+        throw std::string("remove: Position out of bounds");
+    }
+    Node* prev = nullptr;
+    Node* curr = head;
 
-        // insert the given element (argument 2) at
-        // the given position (argument 1)
-        void insert(int, const T&);
+    for (int i = 0; i < position; ++i) {
+        prev = curr;
+        curr = curr->next;
+    }
 
-        // determine if the list currently empty
-        bool isEmpty() const;
+    if (prev == nullptr) {
+        head = curr->next;
+    } else {
+        prev->next = curr->next;
+    }
+    delete curr;
+    length--;
+}
 
-        // remove the element at the given position (argument)
-        void remove(int);
+template <typename T>
+void linkedList<T>::replace(int position, const T& elem) {
+    if (position < 0 || position >= length) {
+        throw std::string("replace: Position out of bounds.");
+    }
+    Node* curr = head;
+    for (int i = 0; i < position; i++) {
+        curr = curr->next;
+    }
+    curr->value = elem;
+}
 
-        // replace the element at the given position (argument 1) with
-        // the value given (argument 2)
-        void replace(int, const T&);
-
-        // overloaded stream insertion operator to make printing easier
-        template <typename U>
-        friend ostream& operator<<(ostream&, const LinkedList<U>&);
-};
-
-
-#endif
+template <typename T>
+ostream& operator<<(ostream& outStream, const linkedList<T>& myObj) {
+    typename linkedList<T>::Node* curr = myObj.head;
+    while (curr != nullptr) {
+        outStream << curr->value;
+        if (curr->next != nullptr) {
+            outStream << " --> ";
+        }
+        curr = curr->next;
+    }
+    return outStream;
+}

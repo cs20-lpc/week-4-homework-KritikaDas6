@@ -1,25 +1,25 @@
 #include <iostream>
 #include <string>
 #include "Student.hpp"
+#include "linkedList.hpp"
 #include "Course.hpp"
 
 using namespace std;
 
 int main() {
-    // our linked list for students
     linkedList<Student> roster;  
     int option;
 
     do {
-        cout << "\n==== Student Management Menu ====\n";
-        cout << "1. Add Student\n";
-        cout << "2. Remove Student\n";
-        cout << "3. Lookup Student\n";
-        cout << "4. Show All Students\n";
-        cout << "5. Get Count\n";
-        cout << "6. Assign Course\n";
-        cout << "7. Quit\n";
-        cout << "Choose an option: ";
+        cout << "\n Student Management Menu"<<endl;
+        cout << "1. Add Student"<<endl;
+        cout << "2. Remove Student"<<endl;
+        cout << "3. Lookup Student"<<endl;
+        cout << "4. Show all Students"<<endl;
+        cout << "5. Get Count"<<endl;
+        cout << "6. Assign Course"<<endl;
+        cout << "7. Quit"<<endl;
+        cout << "Choose an option: "<<endl;
 
         if (!(cin >> option)) {
             cin.clear();

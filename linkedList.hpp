@@ -1,142 +1,43 @@
-template <typename T>
-linkedList<T>::linkedList()
-: head(nullptr), length(0){ }
+#ifndef LINKED_LIST_HPP
+#define LINKED_LIST_HPP
+
+#include <iostream>
+using namespace std;
 
 template <typename T>
-linkedList<T>::~linkedList() {
-    clear();
-}
+class linkedList {
+protected:
+    struct Node {
+        T value;
+        Node* next;
+        Node(T v = T(), Node* n = nullptr)
+            : value(v), next(n) {}
+    };
 
-template <typename T>
-linkedList<T>::linkedList(const linkedList<T>& other)
-: head(nullptr), length(0) {
+    Node* head;
+    int length;
 
-    Node* cur = other.head;
-    while (cur != nullptr) {
-        append(cur->value);
-        cur = cur->next;
-    }
-}
+private:
+    void copy(const linkedList<T>&);
 
-template <typename T>
-linkedList<T>& linkedList<T>::operator=(const linkedList<T>& other) {
-    if (this == &other) return *this;  
-    clear();
-    Node* cur = other.head;
-    while (cur != nullptr) {
-        append(cur->value);
-        cur = cur->next;
-    }
-    return *this;
-}
+public:
+    linkedList();
+    linkedList(const linkedList<T>&);
+    linkedList<T>& operator=(const linkedList<T>&);
+    virtual ~linkedList();
 
-template <typename T>
-void linkedList<T>::append(const T& elem) {
-    Node* n = new Node(elem);
-    if (!head){
-        head = n;
-        this->length++;
-        return;
-    } 
-    Node *curr = head;
-    while (curr->next != nullptr){
-        curr = curr->next;
-    }
-    curr->next = n;
-    this->length++;
-}
+    virtual void append(const T&);
+    virtual void clear();
+    virtual T& getElement(int) const;
+    virtual int getLength() const;
+    virtual void insert(int, const T&);
+    virtual bool isEmpty() const;
+    virtual void remove(int);
+    virtual void replace(int, const T&);
 
+    template <typename U>
+    friend ostream& operator<<(ostream&, const linkedList<U>&);
+};
 
-
-template <typename T>
-void linkedList<T>::clear() {
-    Node *curr = head;
-    while(curr != nullptr){
-        Node *nextNode = curr->next;
-        delete curr;
-        curr = nextNode;
-    }
-    head = nullptr;
-    this->length = 0;
-}
-
-template <typename T>
-T linkedList<T>::getElement(int position) const {
-    if (position < 0 || head == nullptr) {
-        throw std::string("getElement: Position is out of bounds or list is empty.");
-    }
-    Node *curr = head;
-    for (int i = 0; i < position; i++){
-        curr = curr->next;
-    }
-    return curr-> value;
-    
-}
-
-template <typename T>
-int linkedList<T>::getLength() const {
-    return this->length;
-}
-
-template <typename T>
-bool linkedList<T>::isEmpty() const {
-    return this->length == 0;
-}
-
-template <typename T>
-void linkedList<T>::remove(int position) {
-    if (position < 0 || position >= length) {
-        throw std::string("remove: position out of bounds");
-    }
-
-    Node* prev = nullptr;
-    Node* curr = head;
-
-
-    for (int i = 0; i < position; ++i) {
-        prev = curr;
-        curr = curr->next;
-    }
-
-
-    if (prev == nullptr){ 
-        head = curr->next;
-    } else {
-        prev->next = curr->next;
-    }
-    length--;
-    delete curr;
-
-}
-
-template <typename T>
-void linkedList<T>::replace(int position, const T& elem) {
-    if(position < 0){
-        throw std::string("Replace: Position cannot be negative");
-    }
-    Node *curr = head;
-    for (int i = 0; i < position; i++){
-        curr = curr-> next;
-    }
-    curr->value = elem;
-}
-
-template <typename T>
-ostream& operator<<(ostream& outStream, const linkedList<T>& myObj) {
-    if (myObj.isEmpty()) {
-        outStream << "List is empty, no elements to display.\n";
-    }
-    else {
-        typename linkedList<T>::Node* curr = myObj.head;
-        while (curr != nullptr) {
-            outStream << curr->value;
-            if (curr->next != nullptr) {
-                outStream << " --> ";
-            }
-            curr = curr->next;
-        }
-        outStream << endl;
-    }
-
-    return outStream;
-}
+#include "linkedList.tpp"
+#endif
