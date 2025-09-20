@@ -1,0 +1,220 @@
+##Testcases:##
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+1
+Enter ID: 100
+Enter Name: Kritika
+Enter GPA: 4.0
+Student added.
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+1
+Enter ID: 101   
+Enter Name: Kalyan
+Enter GPA: 3.8
+Student added.
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+4
+All students:
+100 Kritika 4
+101 Kalyan 3.8
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+5
+Number of students: 2
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+6
+Enter ID to assign course: 100
+Course name: DSa
+Location: laspo
+Course assigned.
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+3
+Enter ID to find: 100
+Found →
+100 Kritika 4
+  Courses:
+    DSa laspo
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+2
+Enter ID to remove: 101
+Removed student 101.
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+4
+All students:
+100 Kritika 4
+  Courses:
+    DSa laspo
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+7
+Exiting program.
+
+
+
+##Test Cases with input errors:\##
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+1
+Enter ID: 100
+Enter Name: Kritika
+Enter GPA: lp
+Invalid values. Try again.
+
+=== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+2
+Enter ID to remove: 100
+ID not found.
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+6
+Enter ID to assign course: 100
+Student not found.
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+6
+Enter ID to assign course: 88648
+Course name: 101
+Location: 
+Course assigned.
+
+==== Student Management Menu ====
+1. Add Student
+2. Remove Student
+3. Lookup Student
+4. Show all Students
+5. Get Count
+6. Assign Course
+7. Quit
+Choose an option: 
+4
+All students:
+88648 Krtika 4
+  Courses:
+    101 
+
+
+_____________________Comparision with Gemini______________________
+
+- I used cin.ignore() and  getline(cin, cname) when reading names, Gemini using cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); before getline().
+
+- I loop through the linkedList<Student> in driver.cpp, find the matching id, and then call remove(i). Gemini
+adds a helper method LinkedList::deleteById(id) instead of searching in main.
+- I used ove overloaded operator<< in Student and Course classes. Gemini uses display() method inside 
+LinkedList or inside Student that prints directly.
+
+- I added Student::search(linkedList<Student>, id) that returns the index, and then you use that with 
+getElement or remove.Gemini typically adds a searchById(id) method in the LinkedList class itself, 
+which directly finds and optionally prints the student.
+
+- In driver.cpp after finding the student, I call st.addCourse(crs); and then explicitly update the 
+list with roster.replace(i, st);. Gemini Typically designs addCourse() so it updates the student object inside 
+the list directly (by reference or pointer), avoiding the need for a replace() call.

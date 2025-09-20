@@ -11,15 +11,15 @@ int main() {
     int option;
 
     do {
-        cout << "\n Student Management Menu"<<endl;
-        cout << "1. Add Student"<<endl;
-        cout << "2. Remove Student"<<endl;
-        cout << "3. Lookup Student"<<endl;
-        cout << "4. Show all Students"<<endl;
-        cout << "5. Get Count"<<endl;
-        cout << "6. Assign Course"<<endl;
-        cout << "7. Quit"<<endl;
-        cout << "Choose an option: "<<endl;
+        cout << "\nStudent Management Menu"<<endl;
+        cout << "1. Add Student" << endl;
+        cout << "2. Remove Student" << endl;
+        cout << "3. Lookup Student" << endl;
+        cout << "4. Show all Students" << endl;
+        cout << "5. Get Count" << endl;
+        cout << "6. Assign Course" << endl;
+        cout << "7. Quit" << endl;
+        cout << "Choose an option: " << endl;
 
         if (!(cin >> option)) {
             cin.clear();
@@ -77,8 +77,7 @@ int main() {
             for (int i = 0; i < roster.getLength(); i++) {
                 Student st = roster.getElement(i);
                 if (st.getId() == sid) {
-                    cout << "Found → " << st.getName() 
-                         << " (GPA: " << st.getGpa() << ")\n";
+                    cout << "Found →\n" << st << endl;  // operator<< prints student + courses
                     located = true;
                     break;
                 }
@@ -87,7 +86,9 @@ int main() {
         }
         else if (option == 4) {
             cout << "All students:\n";
-            cout << roster;
+            for (int i = 0; i < roster.getLength(); i++) {
+                cout << roster.getElement(i) << endl;  // operator<< prints student + courses
+            }
         }
         else if (option == 5) {
             cout << "Number of students: " << roster.getLength() << endl;
@@ -103,12 +104,14 @@ int main() {
                 if (st.getId() == sid) {
                     string cname, cloc;
                     cout << "Course name: ";
-                    cin >> cname;
+                    cin.ignore();             
+                    getline(cin, cname);      
                     cout << "Location: ";
-                    cin >> cloc;
+                    getline(cin, cloc);  
+
                     Course crs(cname, cloc);
                     st.addCourse(crs);
-                    roster.replace(i, st);
+                    roster.replace(i, st);  
                     cout << "Course assigned.\n";
                     updated = true;
                     break;
