@@ -1,5 +1,5 @@
 ##Testcases:##
-==== Student Management Menu ====
+Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -14,7 +14,7 @@ Enter Name: Kritika
 Enter GPA: 4.0
 Student added.
 
-==== Student Management Menu ====
+Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -29,7 +29,7 @@ Enter Name: Kalyan
 Enter GPA: 3.8
 Student added.
 
-==== Student Management Menu ====
+ Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -43,7 +43,7 @@ All students:
 100 Kritika 4
 101 Kalyan 3.8
 
-==== Student Management Menu ====
+Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -55,7 +55,7 @@ Choose an option:
 5
 Number of students: 2
 
-==== Student Management Menu ====
+Student Management Menu
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -70,7 +70,7 @@ Course name: DSa
 Location: laspo
 Course assigned.
 
-==== Student Management Menu ====
+Student Management Menu
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -86,7 +86,7 @@ Found →
   Courses:
     DSa laspo
 
-==== Student Management Menu ====
+ Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -99,7 +99,7 @@ Choose an option:
 Enter ID to remove: 101
 Removed student 101.
 
-==== Student Management Menu ====
+Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -114,7 +114,7 @@ All students:
   Courses:
     DSa laspo
 
-==== Student Management Menu ====
+Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -130,7 +130,7 @@ Exiting program.
 
 ##Test Cases with input errors:\##
 
-==== Student Management Menu ====
+Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -145,7 +145,7 @@ Enter Name: Kritika
 Enter GPA: lp
 Invalid values. Try again.
 
-=== Student Management Menu ====
+Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -158,7 +158,7 @@ Choose an option:
 Enter ID to remove: 100
 ID not found.
 
-==== Student Management Menu ====
+Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -171,7 +171,7 @@ Choose an option:
 Enter ID to assign course: 100
 Student not found.
 
-==== Student Management Menu ====
+ Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
@@ -186,7 +186,7 @@ Course name: 101
 Location: 
 Course assigned.
 
-==== Student Management Menu ====
+Student Management Menu 
 1. Add Student
 2. Remove Student
 3. Lookup Student
